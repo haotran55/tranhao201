@@ -9,7 +9,7 @@
       --main-color: #00ffff;
       --bg: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       --card-bg: rgba(255, 255, 255, 0.05);
-      --border-color: rgba(255, 255, 255, 0.1);
+      --border-color: rgba(255, 255, 255, 0.08);
     }
 
     * {
@@ -23,6 +23,38 @@
       background: var(--bg);
       color: white;
       scroll-behavior: smooth;
+    }
+
+    /* Top bar giống sellacgame.com */
+    .topbar {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f2027;
+    }
+
+    .topbar .logo {
+      font-weight: bold;
+      color: var(--main-color);
+      font-size: 18px;
+    }
+
+    .topbar .buttons button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: none;
+      color: var(--main-color);
+      border: 1px solid var(--main-color);
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .topbar .buttons button.login {
+      background: var(--main-color);
+      color: #000;
+      border: none;
     }
 
     header, section {
@@ -58,19 +90,19 @@
       margin-bottom: 10px;
     }
 
-    .animated-text span {
-      color: var(--main-color);
+    #typewriter {
       font-weight: bold;
       border-right: 2px solid var(--main-color);
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 3s steps(20, end) infinite;
+      padding-left: 5px;
+      animation: rainbow 5s infinite linear;
     }
 
-    p {
-      opacity: 0.85;
-      margin: 10px 0;
+    @keyframes rainbow {
+      0%   { color: #00ffff; }
+      25%  { color: #00ff88; }
+      50%  { color: #ffaa00; }
+      75%  { color: #ff00aa; }
+      100% { color: #00ffff; }
     }
 
     .btn {
@@ -95,18 +127,18 @@
       text-align: center;
     }
 
-    .card {
+    .box {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
       opacity: 0;
       transform: translateY(40px);
       transition: all 0.6s ease;
     }
 
-    .card.visible {
+    .box.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -126,32 +158,9 @@
       font-weight: bold;
     }
 
-    .project h3 {
-      margin-bottom: 8px;
-    }
-
     .project:hover {
       cursor: pointer;
       background: rgba(255, 255, 255, 0.1);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    input, textarea {
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      font-family: inherit;
-    }
-
-    input[type="submit"] {
-      background: var(--main-color);
-      color: #000;
-      cursor: pointer;
     }
 
     footer {
@@ -160,40 +169,29 @@
       opacity: 0.5;
       font-size: 14px;
     }
-  <style>
-  .box {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 30px;
-  }
-</style>
-
+  </style>
 </head>
 <body>
-  <!-- THÊM NGAY SAU <body> -->
-<div style="border-bottom:1px solid rgba(255,255,255,0.1); padding:10px 20px; display:flex; justify-content:space-between; align-items:center; background:#0f2027;">
-  <div style="font-weight:bold; color:#00ffff; font-size:18px;">HàoEsports</div>
-  <div style="display:flex; gap:12px;">
-    <button style="padding:8px 16px; border-radius:6px; border:1px solid #00ffff; background:none; color:#00ffff; cursor:pointer;">Kết nối ví</button>
-    <button style="padding:8px 16px; border-radius:6px; background:#00ffff; color:#000; border:none; cursor:pointer;">Đăng nhập</button>
-  </div>
-</div>
 
+  <div class="topbar">
+    <div class="logo">HàoEsports</div>
+    <div class="buttons">
+      <button>Kết nối ví</button>
+      <button class="login">Đăng nhập</button>
+    </div>
+  </div>
 
   <header class="hero">
     <div class="avatar">
       <img src="https://i.imgur.com/mtbl1PS.png" alt="Avatar" />
     </div>
-    <h1>Xin chào, mình là <span class="animated-text"><span>Hào Esports</span></span></h1>
+    <h1>Xin chào, mình là <span id="typewriter"></span></h1>
     <p>Fullstack Web Dev & Bot Telegram</p>
-    <a href="#contact" class="btn">Liên hệ ngay</a>
   </header>
 
   <section id="skills">
     <h2>Kỹ năng</h2>
-    <div class="card">
+    <div class="box">
       <div class="skills-list">
         <div class="skill">HTML</div>
         <div class="skill">CSS</div>
@@ -208,33 +206,22 @@
   </section>
 
   <section id="projects">
-  <h2>Dự án</h2>
-  <div class="box">
-    <div class="card project" onclick="location.href='project1.html'">
-      <h3>Bot Telegram</h3>
-      <p>Kiểm tra nhóm, giới hạn lượt like.</p>
+    <h2>Dự án</h2>
+    <div class="box project" onclick="location.href='project1.html'">
+      <h3>Bot kiểm tra thành viên Telegram</h3>
+      <p>Kiểm tra thành viên trong nhóm, giới hạn lượt like, và tích hợp webhook API.</p>
     </div>
-  </div>
-</section>
-
-
-  <section id="cv">
-    <h2>CV cá nhân</h2>
-    <div class="card">
-      <p>Tải xuống CV tại đây:</p>
-      <a class="btn" href="https://example.com/haoesports-cv.pdf" target="_blank">Tải CV</a>
+    <div class="box project" onclick="location.href='project2.html'">
+      <h3>Free Fire Info API</h3>
+      <p>API Flask dùng JWT và protobuf để lấy thông tin người chơi Free Fire.</p>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Liên hệ</h2>
-    <div class="card">
-      <form onsubmit="alert('Cảm ơn bạn đã gửi!'); return false;">
-        <input type="text" placeholder="Tên của bạn" required />
-        <input type="email" placeholder="Email" required />
-        <textarea rows="4" placeholder="Lời nhắn..." required></textarea>
-        <input type="submit" value="Gửi đi" />
-      </form>
+  <section id="cv">
+    <h2>CV cá nhân</h2>
+    <div class="box">
+      <p>Tải xuống CV tại đây:</p>
+      <a class="btn" href="https://example.com/haoesports-cv.pdf" target="_blank">Tải CV</a>
     </div>
   </section>
 
@@ -243,54 +230,45 @@
   </footer>
 
   <script>
-    const span = document.querySelector(".animated-text span");
-    const texts = ["Hào Esports", "Fullstack Developer", "Bot Telegram Expert", "Code là đam mê"];
-    let index = 0;
-    setInterval(() => {
-      span.textContent = texts[index];
-      index = (index + 1) % texts.length;
-    }, 3000);
+    // Hiệu ứng gõ chữ
+    const words = ["Hào Esports", "Fullstack Developer", "Telegram Bot Expert", "Code là đam mê"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriter = document.getElementById("typewriter");
 
-    // Scroll animation
+    function type() {
+      const currentWord = words[wordIndex];
+      const displayed = isDeleting
+        ? currentWord.substring(0, charIndex--)
+        : currentWord.substring(0, charIndex++);
+
+      typewriter.textContent = displayed;
+
+      let speed = isDeleting ? 40 : 90;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        speed = 1500;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        speed = 500;
+      }
+
+      setTimeout(type, speed);
+    }
+
+    type();
+
+    // Animation cuộn xuống
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.card').forEach(el => observer.observe(el));
+    document.querySelectorAll('.box').forEach(el => observer.observe(el));
   </script>
-  <script>
-  const words = ["Hào Esports", "Fullstack Developer", "Telegram Bot Expert", "Code là đam mê"];
-  let wordIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typewriter = document.getElementById("typewriter");
-
-  function type() {
-    const currentWord = words[wordIndex];
-    const displayed = isDeleting
-      ? currentWord.substring(0, charIndex--)
-      : currentWord.substring(0, charIndex++);
-
-    typewriter.textContent = displayed;
-
-    let speed = isDeleting ? 40 : 90;
-
-    if (!isDeleting && charIndex === currentWord.length) {
-      speed = 1500;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-      speed = 500;
-    }
-
-    setTimeout(type, speed);
-  }
-
-  type();
-</script>
-
 </body>
 </html>
