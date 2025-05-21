@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark Mode Toggle</title>
+  <style>
+    :root {
+      --light-bg: #ffffff;
+      --dark-bg: #121212;
+      --light-text: #000000;
+      --dark-text: #ffffff;
+      --primary-color: #2196F3;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    .toggle-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .toggle-button {
+      display: flex;
+      border: 2px solid #001a40;
+      border-radius: 30px;
+      overflow: hidden;
+      width: 100px;
+      height: 50px;
+      cursor: pointer;
+    }
+
+    .toggle-option {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      transition: background-color 0.3s;
+    }
+
+    .light-side {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .dark-side {
+      background-color: white;
+      color: #001a40;
+    }
+
+    body.dark-mode .light-side {
+      background-color: white;
+      color: #001a40;
+    }
+
+    body.dark-mode .dark-side {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-wrapper">
+    <div class="toggle-button" onclick="toggleDarkMode()">
+      <div class="toggle-option light-side" id="sun">☀️</div>
+      <div class="toggle-option dark-side" id="moon">🌙</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html>
