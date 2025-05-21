@@ -1,88 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dark Mode Toggle</title>
   <style>
-    :root {
-      --light-bg: #ffffff;
-      --dark-bg: #121212;
-      --light-text: #000000;
-      --dark-text: #ffffff;
-      --primary-color: #2196F3;
-    }
-
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--light-bg);
-      color: var(--light-text);
+      font-family: sans-serif;
+      background-color: #ffffff;
       transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark-mode {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
-    .toggle-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
-    .toggle-button {
-      display: flex;
+    body.dark {
+      background-color: #121212;
+    }
+
+    .toggle {
+      width: 80px;
+      height: 40px;
       border: 2px solid #001a40;
-      border-radius: 30px;
+      border-radius: 20px;
+      display: flex;
       overflow: hidden;
-      width: 100px;
-      height: 50px;
       cursor: pointer;
     }
 
-    .toggle-option {
-      flex: 1;
+    .toggle div {
+      width: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 24px;
-      transition: background-color 0.3s;
+      justify-content: center;
     }
 
-    .light-side {
-      background-color: var(--primary-color);
-      color: white;
+    .sun {
+      background-color: #2196F3;
     }
 
-    .dark-side {
+    .moon {
       background-color: white;
-      color: #001a40;
     }
 
-    body.dark-mode .light-side {
+    .sun svg {
+      fill: white;
+      width: 20px;
+      height: 20px;
+    }
+
+    .moon svg {
+      fill: #001a40;
+      width: 20px;
+      height: 20px;
+    }
+
+    body.dark .sun {
       background-color: white;
-      color: #001a40;
     }
 
-    body.dark-mode .dark-side {
-      background-color: var(--primary-color);
-      color: white;
+    body.dark .sun svg {
+      fill: #001a40;
+    }
+
+    body.dark .moon {
+      background-color: #2196F3;
+    }
+
+    body.dark .moon svg {
+      fill: white;
     }
   </style>
 </head>
 <body>
-  <div class="toggle-wrapper">
-    <div class="toggle-button" onclick="toggleDarkMode()">
-      <div class="toggle-option light-side" id="sun">☀️</div>
-      <div class="toggle-option dark-side" id="moon">🌙</div>
+  <div class="toggle" onclick="toggleMode()">
+    <div class="sun">
+      <!-- Sun SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M6.995 12c0 2.761 2.246 5.005 5.005 5.005s5.005-2.244 5.005-5.005c0-2.76-2.246-5.005-5.005-5.005s-5.005 2.245-5.005 5.005zm13.002-.998h2v2h-2v-2zm-18 0h2v2h-2v-2zm8.998-8.004h2v2h-2v-2zm0 18.004h2v2h-2v-2zm8.363-15.536l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zm-14.142 14.142l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zm0-14.142l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zm14.142 14.142l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414z"/>
+      </svg>
+    </div>
+    <div class="moon">
+      <!-- Moon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M21.75 15.344a9.718 9.718 0 01-11.094-11.094 1 1 0 00-1.297-1.152A10.997 10.997 0 0012 23c4.91 0 9.106-3.286 10.902-7.641a1 1 0 00-1.152-1.297z"/>
+      </svg>
     </div>
   </div>
 
   <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
+    function toggleMode() {
+      document.body.classList.toggle('dark');
     }
   </script>
 </body>
