@@ -160,9 +160,27 @@
       opacity: 0.5;
       font-size: 14px;
     }
-  </style>
+  <style>
+  .box {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 30px;
+  }
+</style>
+
 </head>
 <body>
+  <!-- THÊM NGAY SAU <body> -->
+<div style="border-bottom:1px solid rgba(255,255,255,0.1); padding:10px 20px; display:flex; justify-content:space-between; align-items:center; background:#0f2027;">
+  <div style="font-weight:bold; color:#00ffff; font-size:18px;">HàoEsports</div>
+  <div style="display:flex; gap:12px;">
+    <button style="padding:8px 16px; border-radius:6px; border:1px solid #00ffff; background:none; color:#00ffff; cursor:pointer;">Kết nối ví</button>
+    <button style="padding:8px 16px; border-radius:6px; background:#00ffff; color:#000; border:none; cursor:pointer;">Đăng nhập</button>
+  </div>
+</div>
+
 
   <header class="hero">
     <div class="avatar">
@@ -190,16 +208,15 @@
   </section>
 
   <section id="projects">
-    <h2>Dự án</h2>
+  <h2>Dự án</h2>
+  <div class="box">
     <div class="card project" onclick="location.href='project1.html'">
-      <h3>Bot kiểm tra thành viên Telegram</h3>
-      <p>Kiểm tra thành viên trong nhóm, giới hạn lượt like, và tích hợp webhook API.</p>
+      <h3>Bot Telegram</h3>
+      <p>Kiểm tra nhóm, giới hạn lượt like.</p>
     </div>
-    <div class="card project" onclick="location.href='project2.html'">
-      <h3>Free Fire Info API</h3>
-      <p>API Flask dùng JWT và protobuf để lấy thông tin người chơi Free Fire.</p>
-    </div>
-  </section>
+  </div>
+</section>
+
 
   <section id="cv">
     <h2>CV cá nhân</h2>
@@ -243,5 +260,37 @@
 
     document.querySelectorAll('.card').forEach(el => observer.observe(el));
   </script>
+  <script>
+  const words = ["Hào Esports", "Fullstack Developer", "Telegram Bot Expert", "Code là đam mê"];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typewriter = document.getElementById("typewriter");
+
+  function type() {
+    const currentWord = words[wordIndex];
+    const displayed = isDeleting
+      ? currentWord.substring(0, charIndex--)
+      : currentWord.substring(0, charIndex++);
+
+    typewriter.textContent = displayed;
+
+    let speed = isDeleting ? 40 : 90;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      speed = 1500;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      speed = 500;
+    }
+
+    setTimeout(type, speed);
+  }
+
+  type();
+</script>
+
 </body>
 </html>
