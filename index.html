@@ -3,106 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Mode Toggle</title>
+  <title>Akiru Wishlist Manager</title>
   <style>
-    :root {
-      --blue: #2196f3;
-      --border: #001a40;
-      --icon-color: #001a40;
-      --dark-bg: #121212;
-      --light-bg: #ffffff;
-    }
-
     body {
       margin: 0;
-      font-family: sans-serif;
-      background-color: var(--light-bg);
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f8fa;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-title {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      transition: background-color 0.3s;
+      gap: 8px;
+      color: #4b55e1;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
-    body.dark {
-      background-color: var(--dark-bg);
+    .subtitle {
+      color: #888;
+      font-size: 0.95em;
+      margin-top: 5px;
     }
 
-    .toggle {
-      width: 90px;
-      height: 45px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .preview {
+      height: 100px;
       display: flex;
-      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      background: #f0f2ff;
+      border: none;
+      font-weight: bold;
       cursor: pointer;
-      box-sizing: border-box;
+      transition: 0.2s;
+      color: #555;
     }
 
-    .toggle .side {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .tab.active {
+      background: white;
+      border-bottom: 2px solid #4b55e1;
+      color: #4b55e1;
     }
 
-    .left {
-      background-color: var(--blue);
+    form label {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 0.9em;
     }
 
-    .right {
-      background-color: white;
+    form input,
+    form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 1em;
     }
 
-    .left svg, .right svg {
-      width: 22px;
-      height: 22px;
+    .icon {
+      margin-right: 6px;
     }
 
-    .left svg {
-      fill: white;
+    .action {
+      width: 100%;
+      padding: 14px;
+      font-size: 1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .right svg {
-      fill: var(--icon-color);
+    .action.add {
+      background: linear-gradient(45deg, #4b55e1, #4b77f1);
+      color: white;
     }
 
-    body.dark .left {
-      background-color: white;
-    }
-
-    body.dark .right {
-      background-color: var(--blue);
-    }
-
-    body.dark .left svg {
-      fill: var(--icon-color);
-    }
-
-    body.dark .right svg {
-      fill: white;
+    .action.remove {
+      background: linear-gradient(45deg, #f63678, #f960a8);
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="toggle" onclick="toggleDarkMode()">
-    <div class="side left">
-      <!-- Sun Icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M6.76 4.84l-1.8-1.79L4 4l1.79 1.79 0.97-0.95zm10.48 0l0.95 0.95L20 4l-0.95-0.95-1.81 1.79zM12 5a1 1 0 001-1V2h-2v2a1 1 0 001 1zm0 14a1 1 0 00-1 1v2h2v-2a1 1 0 00-1-1zm7-7a7 7 0 11-7-7 7 7 0 017 7zm-7 5a5 5 0 105-5 5 5 0 00-5 5zm8-6h2v2h-2v-2zM2 11h2v2H2v-2zm3.76 6.24L4 20l0.95 0.95 1.81-1.79-0.95-0.92zm12.48 0l-0.95 0.92 1.81 1.79L20 20l-1.76-1.76z"/>
-      </svg>
+  <div class="container">
+    <header>
+      <div class="logo-title">
+        <span class="star">★</span>
+        <h1>AKIRU WISHLIST MANAGER</h1>
+      </div>
+      <p class="subtitle">Easily add or remove items from your wishlist</p>
+    </header>
+
+    <div class="card preview">
+      <!-- You can show live preview of items here -->
     </div>
-    <div class="side right">
-      <!-- Moon Icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M21.75 15.344a9.718 9.718 0 01-11.094-11.094 1 1 0 00-1.297-1.152A10.997 10.997 0 0012 23c4.91 0 9.106-3.286 10.902-7.641a1 1 0 00-1.152-1.297z"/>
-      </svg>
+
+    <div class="card">
+      <h2><span class="icon">≡</span> Wishlist Actions</h2>
+
+      <div class="tabs">
+        <button class="tab active" onclick="toggleTab('add')">
+          <span class="plus">＋</span> Add Item
+        </button>
+        <button class="tab" onclick="toggleTab('remove')">
+          <span class="minus">−</span> Remove Item
+        </button>
+      </div>
+
+      <form id="wishlist-form">
+        <label>
+          <span class="icon">▮▮▮▮</span> Item ID
+          <input type="text" placeholder="e.g. 123456789" required>
+        </label>
+
+        <label>
+          <span class="icon">🌐</span> Region
+          <select>
+            <option>INDIA</option>
+            <option>US</option>
+            <option>BR</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="icon">🔑</span> Token Type
+          <select>
+            <option>Access Token</option>
+          </select>
+        </label>
+
+        <label>
+          <span class="icon">🔒</span> Token
+          <input type="text" placeholder="Enter your authentication token" required>
+        </label>
+
+        <button id="action-button" class="action add" type="submit">
+          ＋ Add to Wishlist
+        </button>
+      </form>
     </div>
   </div>
 
   <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
+    function toggleTab(mode) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      const addButton = document.querySelector('.tab:nth-child(1)');
+      const removeButton = document.querySelector('.tab:nth-child(2)');
+      const formButton = document.getElementById('action-button');
+
+      if (mode === 'add') {
+        addButton.classList.add('active');
+        formButton.className = 'action add';
+        formButton.textContent = '＋ Add to Wishlist';
+      } else {
+        removeButton.classList.add('active');
+        formButton.className = 'action remove';
+        formButton.textContent = '🗑 Remove from Wishlist';
+      }
     }
   </script>
 </body>
