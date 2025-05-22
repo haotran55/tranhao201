@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bot kiểm tra thành viên Telegram | Hào Esports</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    h1 {
+      color: #00ffff;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .back {
+      margin-bottom: 30px;
+      display: inline-block;
+      color: #aaa;
+    }
+    .back:hover {
+      color: white;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .code {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back">← Quay lại Portfolio</a>
+  <h1>Bot kiểm tra thành viên Telegram</h1>
+  <p>Bot này dùng để kiểm tra xem người dùng có tham gia kênh Telegram bắt buộc không trước khi like hoặc thực hiện hành động khác.</p>
+
+  <p><strong>Tính năng chính:</strong></p>
+  <ul>
+    <li>Kiểm tra thành viên trong group/kênh</li>
+    <li>Giới hạn lượt sử dụng theo user/group</li>
+    <li>Tích hợp API Like (gửi POST tới server Flask)</li>
+  </ul>
+
+  <div class="code">
+    /like user_id=123 group_id=456 → kiểm tra + gửi API
+  </div>
+
+  <p>Viết bằng: <strong>Python + pyTelegramBotAPI</strong></p>
+</body>
+</html>
