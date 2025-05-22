@@ -1,63 +1,168 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bot kiểm tra thành viên Telegram | Hào Esports</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check Like API - Hào Esports</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --main: #00ffff;
+      --bg: #0f2027;
+      --box-bg: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.08);
+      --font: 'Segoe UI', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: var(--font);
       background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: white;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      min-height: 100vh;
     }
-    a {
-      color: #00ffff;
-      text-decoration: none;
+
+    .topbar {
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    h1 {
-      color: #00ffff;
-      font-size: 32px;
-      margin-bottom: 20px;
+
+    .topbar .logo {
+      font-weight: bold;
+      color: var(--main);
+      font-size: 20px;
     }
-    .back {
-      margin-bottom: 30px;
-      display: inline-block;
-      color: #aaa;
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: var(--box-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .back:hover {
-      color: white;
+
+    h2 {
+      color: var(--main);
+      margin-bottom: 24px;
     }
-    p {
-      line-height: 1.6;
-    }
-    .code {
-      background: rgba(255,255,255,0.1);
-      padding: 12px;
+
+    input {
+      padding: 10px 14px;
       border-radius: 8px;
-      margin-top: 12px;
-      font-family: monospace;
+      border: 1px solid var(--main);
+      background: transparent;
+      color: white;
+      width: 80%;
+      font-size: 16px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    button {
+      background: var(--main);
+      color: black;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 30px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .back {
+      margin-top: 20px;
+      display: inline-block;
+      color: #ccc;
+      text-decoration: underline;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back">← Quay lại Portfolio</a>
-  <h1>Bot kiểm tra thành viên Telegram</h1>
-  <p>Bot này dùng để kiểm tra xem người dùng có tham gia kênh Telegram bắt buộc không trước khi like hoặc thực hiện hành động khác.</p>
 
-  <p><strong>Tính năng chính:</strong></p>
-  <ul>
-    <li>Kiểm tra thành viên trong group/kênh</li>
-    <li>Giới hạn lượt sử dụng theo user/group</li>
-    <li>Tích hợp API Like (gửi POST tới server Flask)</li>
-  </ul>
-
-  <div class="code">
-    /like user_id=123 group_id=456 → kiểm tra + gửi API
+  <div class="topbar">
+    <div class="logo">HàoEsports</div>
+    <div></div>
   </div>
 
-  <p>Viết bằng: <strong>Python + pyTelegramBotAPI</strong></p>
+  <div class="container">
+    <h2>Tra cứu Like từ API</h2>
+    <input type="number" id="uid" placeholder="Nhập UID Free Fire..." />
+    <br>
+    <button onclick="fetchData()">Gửi yêu cầu</button>
+
+    <div id="output" class="result" style="display: none;"></div>
+    <div class="back" onclick="window.history.back()">← Quay lại</div>
+  </div>
+
+  <script>
+    function fetchData() {
+      const uid = document.getElementById('uid').value.trim();
+      const output = document.getElementById('output');
+
+      if (!uid) {
+        output.innerHTML = "<p class='error'>Vui lòng nhập UID!</p>";
+        output.style.display = 'block';
+        return;
+      }
+
+      output.innerHTML = "Đang gửi yêu cầu...";
+      output.style.display = 'block';
+
+      const url = `http://160.250.137.144:5001/like?uid=${uid}&server_name=sg&key=qqwweerrb`;
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error("Không thể kết nối API");
+          return res.json();
+        })
+        .then(data => {
+          output.innerHTML = `
+            <p><strong>UID:</strong> ${data.UID}</p>
+            <p><strong>Người chơi:</strong> ${data.PlayerNickname}</p>
+            <p><strong>Chủ bot:</strong> ${data.owner}</p>
+            <p><strong>Like trước lệnh:</strong> ${data.LikesbeforeCommand}</p>
+            <p><strong>Like sau lệnh:</strong> ${data.LikesafterCommand}</p>
+            <p><strong>Số Like từ API:</strong> ${data.LikesGivenByAPI}</p>
+          `;
+        })
+        .catch(err => {
+          output.innerHTML = `<p class="error">Lỗi: ${err.message}</p>`;
+        });
+    }
+  </script>
+
 </body>
 </html>
