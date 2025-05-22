@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Fire Info API | Hào Esports</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+    a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    h1 {
+      color: #00ffff;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .back {
+      margin-bottom: 30px;
+      display: inline-block;
+      color: #aaa;
+    }
+    .back:hover {
+      color: white;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .code {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back">← Quay lại Portfolio</a>
+  <h1>Free Fire Info API</h1>
+  <p>API lấy thông tin người chơi Free Fire qua Player ID, dùng JWT + protobuf để gửi request tới hệ thống Garena.</p>
+
+  <p><strong>Tính năng:</strong></p>
+  <ul>
+    <li>Mã hóa ID</li>
+    <li>Lấy JWT từ Garena service</li>
+    <li>Decode dữ liệu protobuf trả về</li>
+    <li>API JSON response trả thông tin rank, name, level</li>
+  </ul>
+
+  <div class="code">
+    GET /api/player?uid=encrypted123 → trả về JSON
+  </div>
+
+  <p>Viết bằng: <strong>Python (Flask + requests + protobuf)</strong></p>
+</body>
+</html>
